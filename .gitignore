@@ -4,5 +4,5 @@ appsettings.json
 appsettings.Development.json
 .vs
 .db*
-launchSettings.json
+Properties
 .vscode
