@@ -1,8 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-// This class is for setting up the migrations according to our requirements
 
 namespace Infrastructure.Data.Config
 {
@@ -12,11 +10,13 @@ namespace Infrastructure.Data.Config
         {
             builder.Property(p => p.Id).IsRequired();
             builder.Property(p => p.Name).IsRequired().HasMaxLength(100);
-            builder.Property(p => p.Description).IsRequired().HasMaxLength(100);
+            builder.Property(p => p.Description).IsRequired().HasMaxLength(255);
             builder.Property(p => p.Price).HasColumnType("decimal(18,2)");
-            builder.Property(p => p.PictureURL).IsRequired();
-            builder.HasOne(p => p.ProductBrand).WithMany().HasForeignKey(b => b.ProductBrandId);
-            builder.HasOne(p => p.ProductType).WithMany().HasForeignKey(t => t.ProductTypeId);
+            builder.Property(p => p.PictureUrl).IsRequired();
+            builder.HasOne(b => b.ProductBrand).WithMany()
+                .HasForeignKey(p => p.ProductBrandId);
+            builder.HasOne(t => t.ProductType).WithMany()
+                .HasForeignKey(p => p.ProductTypeId);
         }
     }
 }
